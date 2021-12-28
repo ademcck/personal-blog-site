@@ -1,13 +1,13 @@
 # Personal Blog
 
 ### Home Page
-![Screenshot 1](https://drive.google.com/file/d/1Wv7wmZdv4lhLIqoyJhdUmJK6SWEn3mRX/view?usp=sharing)
+[home page](https://ademcck.com/)
 
 ### Account Page
-![Screenshot 2](https://drive.google.com/file/d/1USE3LhzwVfdVFnbwguoKNgiFpYSwYU_w/view?usp=sharing)
+[account page](https://ademcck.com/accounts/profile/)
 
 ### Public Account Page
-![Screenshot 3](https://drive.google.com/file/d/1MQVSYSfjDixBYGzeAs8qkBMW9Ht9SePK/view?usp=sharing)
+[public account page](https://ademcck.com/accounts/profile/user/root/)
 
 
 
