@@ -1,0 +1,226 @@
+
+{% load static %}
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Playfair+Display&family=Ubuntu:wght@300&display=swap');
+        *{
+            color: #17202a!important;
+            text-decoration: none!important;
+        }
+        body{
+            padding: 0!important;
+            margin: 0!important;
+        }
+        
+        h1,h2,h3,h4,h5,h6 , h1 > small{
+            color: #fff!important;
+            font-family: 'Ubuntu', sans-serif!important;
+        }
+        li{
+            list-style: none!important;
+            letter-spacing: 0.15vh;
+            background: none!important;
+        }
+        
+    </style> 
+<script charset="utf-8" src="https://platform.twitter.com/js/moment~timeline.c7de492113f2eac2bb49ff9013aa2889.js"></script><script charset="utf-8" src="https://platform.twitter.com/js/timeline.55167c7072ca7f4363bf18820295ba93.js"></script></head>
+<body style="background:  #17202a ;">
+    <div class="container d-flex flex-column justify-content-center align-items-center py-5 px-0" style="background: #00152e;">
+        <div class="text-center">
+            {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url  }}" alt="image" class="img-fluid avatar-xs rounded-circle" style="max-width: 150px;">
+            {% else %}
+                <img src="{% static 'media/profile_images/default.png' %}" alt="image" class="img-fluid avatar-xs rounded-circle" style="max-width: 150px;">
+            {% endif %}
+            <h1 class="text-center m-2"><small id="fullname" class="shadow px-3 py-2" style="font-size: 0.5em;"></small></h1>
+            <div class="container skils">
+              {% if user.username == "root" %}
+                <span class="text-center progress-bar-striped bg-primary "><small><i class="py-2 px-5"><h6 style="display: inline;color:rgb(0, 0, 0)!important;">#</h6> Python </i></small></span>
+                <span class="text-center progress-bar-striped bg-warning "><small><i class="py-2 px-5"><h6 style="display: inline;color:rgb(0, 0, 0)!important;">#</h6> Django </i></small></span>
+                <span class="text-center progress-bar-striped bg-info "><small><i class="py-2 px-5"><h6 style="display: inline;color:rgb(0, 0, 0)!important;">#</h6> JS </i></small></span>
+                <span class="text-center progress-bar-striped bg-success "><small><i class="py-2 px-5"><h6 style="display: inline;color:rgb(0, 0, 0)!important;">#</h6> Java </i></small></span>
+              {% endif %}
+                <!-- with for loop -->
+                <!-- <span class="text-center progress-bar-striped bg-primary text-white"><small><i class="p-2"># user.skills </i></small></span> -->
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="main" class="col py-5 ">
+            <div class="row">
+                <div id="iletisim" class="col-md-4 ">
+
+                    <ul class="list-group list-group-flush ">
+                        <h1 class="text-center m-2"><small class="shadow px-3 py-2">İletişim</small></h1>
+
+                        {% if 'email_privacy' in user.privacy.choices_data %}
+                          <li class="list-group-item bg-success border rounded border-dark" style="background: none;">
+                            {% if user.email %}
+                              {{ user.email }}
+                            {% else %}
+                              Kullanıcının Email Bilgisi Bulunmamaktadır
+                            {% endif %}
+                          </li>
+                        {% else %}
+                          <li class="list-group-item bg-success border rounded border-dark" style="background: none;">
+                             Kullanıcı Email Verisini Gizlemiştir.
+                          </li>
+                        {% endif %}
+                        {% if 'tel_privacy' in user.privacy.choices_data %}
+                          <li class="list-group-item bg-success border rounded border-dark" style="background: none;">
+                              
+                              {% if user.profile.phone %}
+                                {{ user.profile.phone }}
+                              {% else %}
+                                Kullanıcının Telefon Bilgisi Bulunmamaktadır
+                              {% endif %}
+                          </li>
+                        {% else %}
+                          <li class="list-group-item bg-success border rounded border-dark" style="background: none;">
+                             Telefon Bilgisi Gizlemiştir.
+                          </li>
+                        {% endif %}
+                        {% if 'adress_privacy' in user.privacy.choices_data %}
+                          <li class="list-group-item bg-success border rounded border-dark" style="background: none;">
+                              {% if user.profile.location  %}
+                                {{ user.profile.location }}
+                              {% else %}
+                                Kullanıcının Adres Bilgisi Bulunmamaktadır
+                              {% endif %}
+                          </li>
+                        {% else %}
+                          <li class="list-group-item bg-success border rounded border-dark" style="background: none;">
+                             Adres Bilgisi Gizlemiştir.
+                          </li>
+                        {% endif %}
+                        
+                        
+                          
+                        
+                        
+                    </ul>
+                    
+                    <div>
+                        <h1 class="text-center m-2"><small class="shadow px-3 py-2">Biografi</small></h1>
+                          {% if 'bio_privacy' in user.privacy.choices_data %}
+                            
+                            <p class="bg-success border rounded border-dark py-2 px-3">
+                              {% if user.profile.bio %}
+                                {{ user.profile.bio }}
+                              {% else %}
+                                Kullanıcının Biografi Bilgisi Bulunmamaktadır
+                              {% endif %}
+                              
+                            </p>
+                          {% else %}
+                            <p class="bg-success border rounded border-dark py-2 px-3">Biografi Bilgisi Gizlenmiştir.</p>
+                          {% endif %}
+                            
+                        
+                    </div>
+                    <div>
+                        <h1 class="text-center m-2"><small class="shadow px-3 py-2">Sosyal Ağlar</small></h1>
+                        <div class="d-flex justify-content-around border border-info py-3 rounded">
+                            <a href="{{ user.profile.personel_site }}"><i class="fas fa-globe-americas" style="cursor:pointer; color: #fff!important; font-size: 20px;" aria-hidden="true"></i></a>
+                            <a href="{{ user.profile.linkedin }}"><i class="fab fa-linkedin-in" style="cursor:pointer; color: #fff!important; font-size: 20px;" aria-hidden="true"></i></a>
+                            <a href="{{ user.profile.facebook }}"><i class="fab fa-facebook" style="cursor:pointer; color: #fff!important; font-size: 20px;" aria-hidden="true"></i></a>
+                            <a href="{{ user.profile.instagram }}"><i class="fab fa-instagram" style="cursor:pointer; color: #fff!important; font-size: 20px;" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    
+                        <div>
+                            <h1 class="text-center m-2"><small class="shadow px-3 py-2">Rozetler</small></h1>
+                            <div class="d-flex flex-column align-items-center border border-info py-3 rounded">
+                              <script src="https://tryhackme.com/badge/38895"></script>
+                              <hr>
+                              <div class="badge-base LI-profile-badge" style="width: 300px;" data-locale="tr_TR" data-size="large" data-theme="dark" data-type="VERTICAL" data-vanity="null0" data-version="v1"></div>
+                              <hr>
+                              <div  style="height: 400px; overflow-y: scroll; width: 300px;">
+                                <a class="twitter-timeline" href="https://twitter.com/AdemC1c3k?ref_src=twsrc%5Etfw">Tweets by AdemC1c3k</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+                              </div>
+              
+                            </div>
+                            
+                        </div>
+                        
+                    
+    
+                    <!-- icons and link -->
+                </div>
+                <div class="text-center col-md-8 "><!--offset-md-1-->
+                  <h1 class="text-center m-2"><small class="shadow px-3 py-2">Postlar</small></h1>
+                  <ul style="padding: 0;"> 
+                    {% if user.posts|length == "0" %}
+                      <a href="# ">
+                        <li class=" py-2 bg-info rounded" style="cursor: pointer;">
+                            <h3><small class="text-white">Kullanıcının Henüz Hiç Gönderisi Bulunmamaktadır.</small></h3> 
+                        </li>
+                      </a>
+                    {% else %}
+                      {% for post in posts %}
+                        <a href="{{ post.get_absolute_url }} " class="py-2">
+                            <li class="bg-info rounded px-2" style="cursor: pointer;">
+                                <h3><small class="text-warning">{{ post.title }}</small></h3> 
+                                <div class="text-white"> {{ post.pub_date|timesince }} önce</div>
+                                <p>{{ post.content|safe|linebreaks|truncatechars_html:250 }}</p>
+                          </li>
+                        </a>
+                    
+                        <hr>
+                          
+                      {% endfor %} 
+                    {% endif %}
+                  </ul>  
+                        <!-- posts -->
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <footer class="p-0">
+      <div class="container py-4">
+          <ul class=" p-0 row justify-content-between text-center">
+            <a  class="bg-primary rounded col-md-3 " href="/"><li class=" py-3 text-white" style="font-family: 'Comfortaa', cursive !important;">ANAYSAYFA </li></a>
+            {% if not request.user.is_authenticated %}
+                <a class="bg-info rounded col-md-3 " href="{% url 'accounts:login' %}"><li class=" py-3 text-white" style="font-family: 'Comfortaa', cursive !important;">GİRİŞ YAP</li></a>
+                <a class="bg-info rounded col-md-3 " href="{% url 'accounts:register' %}"><li class=" py-3 text-white" style="font-family: 'Comfortaa', cursive !important;">KAYIT OL </li></a>
+            {% else %}
+                <a class="bg-info rounded col-md-3 " href="{% url 'accounts:profile' %}"><li class=" py-3 text-white" style="font-family: 'Comfortaa', cursive !important;">HESABIM </li></a>
+                <a class="bg-danger rounded col-md-3 " href="{% url 'accounts:logout' %}"><li class=" py-3 text-white" style="font-family: 'Comfortaa', cursive !important;">ÇIKIŞ </li></a>
+            {% endif %}  
+          </ul>
+        </div>
+        
+    </footer>
+    <script>
+        let fullName = "Kullanıcı İsim Bilgisi Bulunmamaktadır.";
+        if ("{{ user.get_full_name }}"){
+          fullName = "{{ user.get_full_name }}";
+        };
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            demo()
+        })
+        async function demo() {
+            for(i=0;i <= fullName.length ; i++){
+                document.getElementById("fullname").textContent += fullName.charAt(i);
+                await sleep();
+            }
+        }
+        function sleep(){
+            return new Promise(resolve => setTimeout(resolve, Math.floor((Math.random()*300)+1)));
+        }
+
+    </script>
+    <script src="https://kit.fontawesome.com/55155ac74d.js" crossorigin="anonymous"></script>
+    <script src="https://platform.linkedin.com/badges/js/profile.js" async="" defer="" type="text/javascript"></script>
+    
+  </body>
+</html>

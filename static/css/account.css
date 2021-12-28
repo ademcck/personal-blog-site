@@ -1,0 +1,64 @@
+body{
+    background: #17202a!important;
+}
+header > div > div > div{
+    transition: 0.4s;
+    cursor: pointer;
+    border-left: 0.5px solid #fff;
+    border-right: 0.5px solid #fff;
+}
+
+header > div > div > div:nth-child(1) > div{
+    height: 0;
+    overflow: hidden;
+    top: 3rem;
+    left: 0;
+    width: 0;
+    border-top: 0.5px solid #fff;
+    font-size: 9pt;
+    transition:  0.4s;
+}
+header > div > div > div:nth-child(1) > div > div:nth-child(1){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header > div > div > div:nth-child(1) > div > div:nth-child(1) > div{
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    
+}
+header > div > div > div:nth-child(1) > div  > div{
+    padding: 0.5em 1rem;
+}
+p{
+    padding-top: 1em;
+    font-weight: normal !important;
+    font-size: 8pt !important;
+}
+small{
+    font-size: 10pt !important;
+}
+ul{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.4rem;
+}
+li{
+    margin: 5px;
+    list-style: none;
+}
+
+a:hover{
+    text-decoration:none !important;
+}
+@media only screen and (max-width: 720px) {
+    header > div > div > div:nth-child(1) > div{
+        overflow: hidden;
+        top: 3rem;
+        left: 0;
+        width: 0;
+        border-top: 0.5px solid #fff;
+    }
+}

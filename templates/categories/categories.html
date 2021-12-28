@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title%}Post Index - {{block.super}}{% endblock %}
+{% block body %}
+<section class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+    {% for post in posts %}
+        {% if post.category == cats %}
+            <div class="row bg-info text-light my-5 shadow ">
+                {% if post.image %}
+                    <div class="col-md-6" style="background-image: url({{ post.image.url}}); background-size: cover; background-position: center center; opacity: 1; min-height:400px;"></div>
+                {% else %}    
+                    <div class="col-md-6" style="background-image: url(https://source.unsplash.com/user/a_myth); background-size: cover; background-position: center center; opacity: 1; min-height:400px;"></div>
+                {% endif %}
+                <div class="col-md-6 align-self-center p-4 ">
+                    <h5><small>Yazar: <a class="text-danger" href="{% url 'accounts:user_profile' username=post.user%}">{{post.user}}</a> | {{ post.pub_date|timesince }} önce</small> </h5>
+                    <h3 class="font-weight-light text-warning">{{ post.title }} </h3>
+                    <p >{{ post.content|truncatechars_html:250|safe }}</p>
+                    <div class="d-flex justify-content-around">
+
+                        <a href="{{ post.get_absolute_url }}" class="btn btn-success btn-sm">Daha Fazlası İçin</a>
+                        <span class="text-center progress-bar-striped bg-primary text-white"><small><i class="p-2">#{{ post.category }}</i></small></span>
+                    </div>   
+                </div>           
+            </div>
+        {% endif %}
+    {% endfor %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class=" pagination  justify-content-center">
+                    
+                    <span class="step-links d-flex  align-items-center  ">
+                        
+                        {% if posts.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a>
+                            </li>
+                        {% endif %}
+
+
+                        <li class=" page-item active"><a class="page-link" href="#">{{ posts.number }}</a></li>
+                        
+                        {% if posts.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.paginator.num_pages }}"> {{ posts.paginator.num_pages }}</a>
+                            </li>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

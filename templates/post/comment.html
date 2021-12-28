@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+
+
+<div class="col10 mx-auto form p-4 text-secondary shadow">
+    <form method="POST">
+        {% csrf_token %}
+        <h3 class="text-dark border border-warning p-3 text-center progress-bar-striped bg-warning">Yorum Ekle</h3>
+        <br>
+        <br>
+        {{ form|crispy }}
+        <input class="form-control  btn-primary col-4"  type="submit" value="GÖNDER"></input>
+    </form>
+</div>

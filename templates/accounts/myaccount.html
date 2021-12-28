@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/account.css'  %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{% block title%}Hesabım{% endblock %}</title>
+</head>
+<body>
+    <header >
+        <div class="container-fluid" style="position: relative;">
+            <div class="row parrentMenu" >
+                <div id="nawBar" act="false" class="bg-primary p-2 col-sm-12 col-md-2  fas fa-bars" style="width: 100%;color: #fff; font-size: 2em; position: relative;">
+                    <div id="profile_user"  class="bg-primary" style="position: absolute; ">
+                        <div style="position: relative;">
+                            <span style="position: absolute; top: 1rem;right: 1rem;"><a href="{% url 'accounts:profile' %}update"><i class="fas fa-user-cog" style="color: #fff; font-size: 20px;"></i></a></span>
+                            {% if user.profile.avatar %}
+                                <div style="background: url({{ user.profile.avatar.url }}); background-size: cover; background-position: center center;"></div>
+                            {% else %}
+                                <div style="background: url({% static 'media/profile_images/default.png' %}"); background-size: cover; background-position: center center;"></div>
+                            {% endif %}    
+                        </div>
+                        <div class="bg-primary " style="width: 100%; color: #fff;" id="username"><span>Kullanıcı Adı: </span> <small>{{ user.username }}</small></div>
+                        <div class="bg-primary " style="width: 100%; color: #fff;" id="full_name"><span>Tam Adı: </span> <small>{{ user.get_full_name }}</small></div>
+                        <div class="bg-primary " style="width: 100%; color: #fff;" id="email"><span>Email: </span> <small>{{ user.email }}</small></div>
+                        <div class="bg-primary " style="width: 100%; color: #fff;" id="biography"> <span>Biografi: </span><p>{{ user.profile.bio  }}</p><hr></div>
+                        <div class="bg-primary"><a href="{% url 'accounts:user_profile' username=user.username%}" style="color: #fff!important;"><span>Public Profil İçin Tıklayınız..</span></a><hr></div>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-globe-americas" style="color: #fff; font-size: 15px;"></i></a></li>
+                            <li><a href="#"><i class="fas fa-envelope"  style="color: #fff; font-size: 15px;"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in" style="color: #fff; font-size: 15px;"></i></a></li>
+                            <li><a href="#"><i class="fab fa-facebook" style="color: #fff; font-size: 15px;"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram" style="color: #fff; font-size: 15px;"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a style="height: 100%; width: 100%; color: #fff; background-color: #007bff; padding-top: 1rem; padding-bottom: 1rem;" class=" px-2 d-flex justify-content-center align-items-center header_choice col-sm-12 col-md-2" href="/">Anasayfa</a>
+                <a style="height: 100%; width: 100%; color: #fff; background-color: #007bff; padding-top: 1rem; padding-bottom: 1rem;" class=" px-2 d-flex justify-content-center align-items-center header_choice col-sm-12 col-md-2" href="{% url 'post:create' %}">Post Oluştur</a>
+                <a style="height: 100%; width: 100%; color: #fff; background-color: #007bff; padding-top: 1rem; padding-bottom: 1rem;" class=" px-2 d-flex justify-content-center align-items-center header_choice col-sm-12 col-md-2" href="{% url 'accounts:profile' %}posts/">Postlarım</a>
+                <a style="height: 100%; width: 100%; color: #fff; background-color: #007bff; padding-top: 1rem; padding-bottom: 1rem;" class=" px-2 d-flex justify-content-center align-items-center header_choice col-sm-12 col-md-2" href="{% url 'post:liked_posts' %}">Beğendiklerim</a>
+                <a style="height: 100%; width: 100%; color: #fff; background-color: #007bff; padding-top: 1rem; padding-bottom: 1rem; cursor: pointer;" class=" px-2 d-flex justify-content-center align-items-center header_choice col-sm-12 col-md-2"  id="delete">Hesabımı Sil</a>
+            </div>
+        </div>
+    </header>
+    <br>
+    <br>
+    {% block body %}
+    {% endblock %}
+    <script>
+        document.getElementById("delete").addEventListener('click',()=>{
+            if (confirm("Hesap Silme İşlemini Gerçekleştirmeye Emin Misiniz?")){
+                location.replace("{% url 'accounts:profile' %}delete/");
+            }else{
+                //
+            }
+        });
+    </script>
+    <script src="https://kit.fontawesome.com/55155ac74d.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/account.js'  %}"></script>
+</body>
+</html>

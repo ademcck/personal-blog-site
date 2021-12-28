@@ -1,0 +1,22 @@
+{% extends 'accounts/myaccount.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container ">
+  <div class="form-row shadow">
+      <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 mx-auto form p-4 text-light ">
+          <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <h1 class="text-center bg-success p-2 text-white" style="font-size:  3vh;">Profilini Güncelle</h1>
+              <br>
+
+              {{ user_form|crispy }}
+              <hr>
+              {{ profile_form|crispy }}
+              <hr>
+              {{ privacy_form|crispy }}
+              <input class="form-control  btn-primary"  type="submit" value="GÖNDER"></input>
+          </form>
+      </div>
+  </div>
+
+{% endblock %}

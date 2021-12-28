@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css'  %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <script>hljs.highlightAll();</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <title>{% block title%}Bloglar{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="choice" status="true">
+            <button id="b_1">TR</button>
+            <button id="b_2">EN</button>
+        </div>
+        <div class="line"></div>
+        <div class="mainmenu">
+            <div id="category" status = "true">Kategoriler</div>
+            <ul id="ul-style">
+                <a href="/post/category/cyber-security/" class="a-style"><li class="li-style">Siber Güvenlik</li></a>
+                <a href="/post/category/operation-system/" class="a-style"><li class="li-style">İşletim  Sistemleri</li></a>
+                <a href="/post/category/software/" class="a-style"><li class="li-style">Yazılım</li></a>
+                <a href="/post/category/latest-news" class="a-style"><li class="li-style">Son Haberler</li></a> 
+                <a href="/post/category/about-life/" class="a-style"><li class="li-style">Hayat Hakkında</li></a>
+            </ul>
+        </div>
+    </header>
+    
+    <form id="s_a" role="search" method="GET">
+        <div class="search">
+            <div class="icon"><input type="submit" value=""  style="background-color: none; border: none;"></div>
+            <div class="input">
+                <input type="text"  id="mysearch" name="q" value="{{ request.GET.q }}">
+            </div>
+            <span class="clear"></span>
+        </div>
+    </form>
+    
+    
+    {% block body %}
+    {% endblock %}
+    <!-- Footer ----------------------------------------------------------------------------------->
+
+    <footer class="text-center text-lg-start text-white" style="background-color: rgb(8, 68, 95); margin-top: 1rem;" >
+        <div class="container ">
+            <div class="d-flex flex-column justify-content-center align-items-center " style="width: 100%;padding: 1rem;">
+                <div style="background-image: url({% static 'media/whoami.png'  %}); background-size: cover; background-position: center center; opacity: 1; height:120px; width: 120px;" class="rounded-circle shadow "></div>
+                <h5 style="padding-top: 1rem;"><strong style="font-family: Alumni Sans;">Ben Kimim</strong></h5>
+            </div>
+            <div class="row p-4">
+                <div class="col-md-4 m-2 d-flex flex-column justify-content-center align-items-center">
+                    <h4><small class="text-danger">Nedir? Ne değildir?</small></h4>
+                    <p class="bg-c">Sitemiz, blog sitesi olup, tamamen bilgilendirmek amaçlı paylaşımlar yapılmaktadır. Site üyeleri yaptıkları paylaşımlardan sorumludur. Site Herhangi bir kuruma veya kuruluşa bağlı değildir. Kategoriler, seçeneklerdeki gibidir..</p>
+                </div>
+                <div class="col-md-4 m-2">
+                    <h4><small class="text-warning">Kategoriler</small></h4>
+                    <ul class="list-group">
+                        <li><a href="/post/category/cyber-security/"  class="mnl_link">Siber Güvenlik</a></li>
+                        <li><a href="/post/category/operation-system/" class="mnl_link">İşletim Sistemleri</a></li>
+                        <li><a href="/post/category/software/" class="mnl_link">Yazılım</a></li>
+                        <li><a href="/post/category/latest-news" class="mnl_link">Son Haberler</a></li>
+                        <li><a href="/post/category/about-life/" class="mnl_link">Hayat Hakkında</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 m-2">
+                    <ul class="list-group">
+                        <h4><small class="text-warning">Hesabım</small></h4>
+                        <li><a class="mnl_link"  href="/">Anasayfa </a></li>
+                    {% if not request.user.is_authenticated %}
+                        <li><a class="mnl_link"  href="{% url 'accounts:login' %}">Giriş Yap </a></li>
+                        <li><a class="mnl_link" href="{% url 'accounts:register' %}">Kayıt Ol </a></li>
+                    {% else %}
+                        <li ><a class="mnl_link" href="{% url 'accounts:profile' %}">Hesabım </a> </li>
+                        <li ><a class="mnl_link" href="{% url 'accounts:logout' %}">Çıkış </a> </li>
+                    {% endif %}  
+                    </ul> 
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <i class="col mb-3" style="text-align: center;">Hoşgeldiniz {{ request.user.get_full_name }}</i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Footer ----------------------------------------------------------------------------------->
+    <script src="https://kit.fontawesome.com/55155ac74d.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/mouse.js' %}"></script>
+
+
+</body>
+</html>
