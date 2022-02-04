@@ -1,17 +1,4 @@
-# Personal Blog
-
-### Home Page
-[home page](https://ademcck.com/)
-
-### Account Page
-[account page](https://ademcck.com/accounts/profile/)
-
-### Public Account Page
-[public account page](https://ademcck.com/accounts/profile/user/root/)
-
-
-
-
+# Personal Blog Site
 
 > installation steps
  - install virtualenv and use like below
@@ -19,30 +6,29 @@
    ```bash
     ┌──(ademcck㉿kali)-[~]
     └─$ virtualenv venv
-
-  ```
-  - then, activate your created virtualenv
+   ```
+ - then, activate your created virtualenv
   ```bash
     ┌──(ademcck㉿kali)-[~]
     └─$ source venv/bin/activate
 
   ```
-  - after this point, install all python module from the requirements.txt file
+ - after this point, install all python module from the requirements.txt file
   ```bash
-    ┌──(ademcck㉿kali)-[~]
-    └─$ pip install -r requirements.txt
+      ┌──(ademcck㉿kali)-[~]
+      └─$ pip install -r requirements.txt
 
   ```
-  - for now, everything is installed. Don't forget to install ckeditor
-  - as a finally setting. In this /blog/settings/ path, Modify the production.py and base.py files according to you.
-  - and finally
+ - for now, everything is installed. Don't forget to install ckeditor
+ - as a finally setting. In this /blog/settings/ path, Modify the production.py and base.py files according to you.
+ - and finally
   ```bash
-    ┌──(ademcck㉿kali)-[~]
-    └─$ python manage.py makemigrations
-    .
-    .
-    ┌──(ademcck㉿kali)-[~]
-    └─$ python manage.py migrate
+     ┌──(ademcck㉿kali)-[~]
+     └─$ python manage.py makemigrations
+     .
+     .
+     ┌──(ademcck㉿kali)-[~]
+     └─$ python manage.py migrate
 
   ``` 
   
